@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine For My Best ❤️</title>
+
+<style>
+body{font-family:'Arial',sans-serif;text-align:center;background:#ffd6e0;overflow:hidden;height:100vh;margin:0;display:flex;align-items:center;justify-content:center;}
+#container{background:white;padding:30px;border-radius:25px;box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:10;width:90%;max-width:400px;}
+button{padding:15px 30px;margin:10px;font-size:18px;cursor:pointer;border-radius:50px;border:none;font-weight:bold;transition:0.3s;}
+#yesBtn{background-color:#ff4d6d;color:white;box-shadow:0 4px 15px rgba(255,77,109,0.4);}
+#no{position:fixed;background-color:#5b5b5b;color:white;z-index:100;transition:0.1s;}
+h1{color:#d63384;font-size:26px;line-height:1.4;}
+.gif-img{width:100%;border-radius:15px;margin-top:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.heart{position:fixed;top:-10px;user-select:none;z-index:1;pointer-events:none;}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+<div id="content">
+<h1>Will you be my Valentine? ❤️</h1>
+<button id="yesBtn" onclick="celebrate()">Yes 💖</button>
+<button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😈</button>
+</div>
+</div>
+
+<!-- 🔧 preload added -->
+<audio id="mySong" src="./music.mp3" preload="auto" loop></audio>
+
+<script>
+function moveNo(){
+let btn=document.getElementById('no');
+btn.style.left=Math.random()*80+'vw';
+btn.style.top=Math.random()*80+'vh';
+}
+
+function celebrate(){
+
+let song=document.getElementById('mySong');
+song.currentTime=0;
+song.muted=false;
+song.play().catch(()=>{});
+
+document.getElementById('container').innerHTML=`
+<h1>I Love You So Much Babe ❤️</h1>
+<h2 style="color:#ff4d6d;font-size:18px;">You are the best valentine ever❤️😋</h2>
+<img src="./giphy.gif" class="gif-img">
+<p style="font-size:12px;margin-top:15px;color:#d63384;font-weight:bold;">Tap anywhere if music doesn't start! 🎵</p>
+`;
+
+setInterval(createHeart,200);
+
+document.body.onclick=function(){
+song.play();
+};
+}
+
+function createHeart(){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*20+20)+"px";
+h.style.animation="fall 3s linear forwards";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+}
+</script>
+
+</body>
+</html>
